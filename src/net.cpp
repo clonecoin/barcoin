@@ -49,7 +49,8 @@ static bool vfReachable[NET_MAX] = {};
 static bool vfLimited[NET_MAX] = {};
 static CNode* pnodeLocalHost = NULL;
 uint64 nLocalHostNonce = 0;
-array<int, THREAD_MAX> vnThreadsRunning;
+//array<int, THREAD_MAX> vnThreadsRunning;
+boost::array<int, THREAD_MAX> vnThreadsRunning;
 static std::vector<SOCKET> vhListenSocket;
 CAddrMan addrman;
 
@@ -996,8 +997,8 @@ void ThreadSocketHandler2(void* parg)
 // Each pair gives a source name and a seed name.
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
-static const char *strDNSSeed[][1] = {
-    {"66.85.164.76 "},
+static const char *strDNSSeed[][2] = {
+    {"seed", "66.85.164.76"},
 };
 
 void ThreadDNSAddressSeed(void* parg)
